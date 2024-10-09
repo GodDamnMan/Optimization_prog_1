@@ -109,7 +109,7 @@ class Simplex:
             k+=1
         print()
 
-
+#function to get the input from the user and it's correctness
 def simplex_input():
 
     type = input("Greetings, this programm will solve your LP problem using Simplex method.\nEnter the type of the problem(Max/Min): ").lower()
@@ -127,7 +127,6 @@ def simplex_input():
         if(amount < 1):
             print("ERROR: AMOUNT < 1 ?!")
         constraints = []
- #       print("Write constraints in format: num num sign\nExample: 3 4 <=")
         for i in range(amount):
             constraint = list(map(float, input(f"Enter the {i+1} constraint function coefficients: ").split(" ")))
             if(len(constraint) == 0):
