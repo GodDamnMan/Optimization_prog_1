@@ -38,9 +38,10 @@ class Simplex:
                 break
 
             self.basic[leaves - 1] = self.vars[enters]
-            
+
+            temp = self.solving[leaves][enters]
             for i in range(self.m):
-                self.solving[leaves][i] /= self.solving[leaves][enters]
+                self.solving[leaves][i] /= temp
         
             for i in range(self.n):
                 if i == leaves:
