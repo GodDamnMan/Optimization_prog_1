@@ -72,7 +72,7 @@
     \\ - Main Coding Implementation: Marat was mainly responsible for writing the core part of the program. He worked on coding the Simplex method from scratch, ensuring that it did not rely on built-in functions, as per the assignment's requirements. His task involved implementing the algorithm for solving Linear Programming Problems (LPP), which required careful attention to the mathematical operations and logic of the Simplex method.
     \item Team member 2: Vasilev Ivan
     \\ Grade : 5
-    \\- Testing: Ivan was responsible for testing the implemented program. He tested the code on different objective functions and constraints, as required by the assignment. Specifically, he ensured that the Simplex method worked across a variety of test cases, covering different numbers of variables and constraints. His role was crucial in validating the correctness and robustness of the program, and he documented any bugs or errors found during the testing phase.
+    \\- Testing: Ivan was responsible for testing the implemented program. He tested the code on different objective functions, constraints and user input mistakes as required by the assignment. Specifically, he ensured that the Simplex method worked across a variety of test cases, covering different numbers of variables and constraints. His role was crucial in validating the correctness and robustness of the program, and he documented any bugs or errors found during the testing phase.
     \item Team member 3: Belyaev Grigorii
     \\ Grade : 5
     \\- Research and Problem Specification: Grigorii's role involved researching tools, selecting the appropriate programming platform, and specifying the linear program to be solved. He helped identify a suitable LPP model that could be addressed by the Simplex method and ensured that the problem met all the criteria specified in the assignment. Grigorii also contributed to converting the problem into the standard form if necessary, which is an essential step in preparing the input for the Simplex algorithm.
@@ -145,15 +145,7 @@ Copy-paste your code here.
 
 \begin{lstlisting}[language=Python, caption=Программа на Python, label=lst:python-code]
 import math
-c = [1,2,3]
 
-a = [[1,1,1],
-     [2,1,0],
-     [0,1.5,1]]
-
-b = [8,10,7]
-
-epsilon = 1
 class Simplex:
     
     # we define tableu:list (n:int * m:int) - matrix for simplex
@@ -163,7 +155,7 @@ class Simplex:
     def __init__(self, obj_function: list, constrains_matrix: list, right_hand_side_num: list, epsilon:int):
         self.constrains = constrains_matrix
         self.tableu = [[-c for c in obj_function] + [0 for i in range(len(constrains_matrix))] + [0]]
-        for i in range(len(a)):
+        for i in range(len(constrains_matrix)):
             self.tableu.append([el for el in constrains_matrix[i]] + [1 if i == j else 0 for j in range(len(constrains_matrix))] + [right_hand_side_num[i]])
         
         self.n = len(self.tableu)
@@ -221,11 +213,22 @@ class Simplex:
     # function to print initial tableu
     def print_initial(self):
         print("initial tableu:")
+        string = '____'
+        for j in range (len(self.tableu[0])-1):
+            string += "|" + (self.eps + 4)//2 * " " + self.vars[j] + (self.eps + 4)//2 * " "
+        string += "|" + (self.eps + 2)//2 * " " + "Sol" + (self.eps + 4)//2 * " " + "|"
+        print(string)
+
+        k = 0
         for i in self.tableu:
-            print("|", end = "")
+            if(k == 0):
+                print(" z  |", end = "")
+            else:
+                print(self.basic[k-1] + "  |", end = "")
             for j in i:
                 print(self.formatting.format(j), end = " |")
             print()
+            k+=1
         print()
 
     # function to print tableu after applying a Simplex method
@@ -234,16 +237,78 @@ class Simplex:
         for i in range(len(self.basic)):
             print(self.basic[i], "=", self.solving[i+1][self.m-1])
             
+        string = '____|'
+        for j in range (len(self.tableu[0])-1):
+            string += (self.eps + 4)//2 * " " + self.vars[j] + (self.eps + 4)//2 * " " + "|"
+        string += (self.eps + 2)//2 * " " + "Sol" + (self.eps + 4)//2 * " " + "|"
+        print(string)
+
+        k = 0
         for i in self.solving:
-            print("| ", end = "")
+            if(k == 0):
+                print(" z  |", end = "")
+            else:
+                print(self.basic[k-1] + "  |", end = "")
             for j in i:
                 print(self.formatting.format(j), end = " |")
             print()
+            k+=1
         print()
-        lp = Simplex(c, a, b, epsilon)
+
+#function to get the input from the user and it's correctness
+def simplex_input():
+
+    type = input("Greetings, this programm will solve your LP problem using Simplex method.\nEnter the type of the problem(Max/Min): ").lower()
+    if (type != "max" and type != "min"):
+        print("ERROR: UNKNOWN TYPE")
+        return
+    
+    try:
+        objective_function = list(map(float, input("Enter the coefficients of the objective function: ").split(" ")))
+        if(len(objective_function) == 0):
+            print("ERROR: NO COEFFICIENTS")
+            return
+        
+        amount = int(input("Enter amount of the constraints(not assuming x>=0): "))
+        if(amount < 1):
+            print("ERROR: AMOUNT < 1 ?!")
+        constraints = []
+        for i in range(amount):
+            constraint = list(map(float, input(f"Enter the {i+1} constraint function coefficients: ").split(" ")))
+            if(len(constraint) == 0):
+                print("ERROR: NO COEFFICIENTS")
+                return
+            constraints.append(constraint)
+
+
+        right_hand_side = list(map(float, input("Enter the right-hand side numbers: ").split(" ")))
+        if(len(right_hand_side) != amount):
+            print("ERROR: NOT ENOUGH COEFFICIENTS")
+            return
+        else:
+            for i in right_hand_side:
+                if(i < 0):
+                    print("The method is not applicable!")
+                    return
+
+        accuracy = int(input("Enter the approximation accuracy: "))
+
+        lp = Simplex(objective_function, constraints, right_hand_side, accuracy)
         lp.print_initial()
-        lp.solve_maximize()
+        if(type == "max"):
+            lp.solve_maximize()
+        else:
+            lp.solve_minimize()
         lp.print_solved()
+
+
+    except ValueError:
+        print("ERROR: NOT A NUMBER")
+        return
+    
+
+simplex_input()
+
 \end{lstlisting}
 
 
