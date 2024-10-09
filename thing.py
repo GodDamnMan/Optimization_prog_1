@@ -69,11 +69,16 @@ class Simplex:
     def print_initial(self):
         print("initial tableu:")
         string = '____'
-        for j in range (len(self.tableu[0])-1):
-            string += "|" + (self.eps + 4)//2 * " " + self.vars[j] + (self.eps + 4)//2 * " "
-        string += "|" + (self.eps + 2)//2 * " " + "Sol" + (self.eps + 4)//2 * " " + "|"
-        print(string)
-
+        if ((self.eps + spacing)%2 == 1 or (self.eps + spacing) == 5):
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + ((self.eps + spacing)//2) * " " + self.vars[j] + ((self.eps + spacing)//2) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + (self.eps + spacing)//2 * " " + "|"
+            print(string)
+        else: 
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + (self.eps + spacing)//2 * " " + self.vars[j] + ((self.eps + spacing)//2-1) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + ((self.eps + spacing)//2-1) * " " + "|"
+            print(string)
         k = 0
         for i in self.tableu:
             if(k == 0):
@@ -92,11 +97,17 @@ class Simplex:
         for i in range(len(self.basic)):
             print(self.basic[i], "=", self.solving[i+1][self.m-1])
             
-        string = '____|'
-        for j in range (len(self.tableu[0])-1):
-            string += (self.eps + 4)//2 * " " + self.vars[j] + (self.eps + 4)//2 * " " + "|"
-        string += (self.eps + 2)//2 * " " + "Sol" + (self.eps + 4)//2 * " " + "|"
-        print(string)
+        string = '____'
+        if ((self.eps + 4)%2 == 1 or (self.eps + 4) == 5):
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + ((self.eps + spacing)//2) * " " + self.vars[j] + ((self.eps + spacing)//2) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + (self.eps + spacing)//2 * " " + "|"
+            print(string)
+        else: 
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + (self.eps + spacing)//2 * " " + self.vars[j] + ((self.eps + spacing)//2-1) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + ((self.eps + spacing)//2-1) * " " + "|"
+            print(string)
 
         k = 0
         for i in self.solving:
@@ -110,7 +121,7 @@ class Simplex:
             k+=1
         print()
 
-#function to get the input from the user and it's correctness
+
 def simplex_input():
 
     type = input("Greetings, this programm will solve your LP problem using Simplex method.\nEnter the type of the problem(Max/Min): ").lower()
@@ -128,6 +139,7 @@ def simplex_input():
         if(amount < 1):
             print("ERROR: AMOUNT < 1 ?!")
         constraints = []
+        print("Write constraints in format: num num sign\nExample: 3 4 <=")
         for i in range(amount):
             constraint = list(map(float, input(f"Enter the {i+1} constraint function coefficients: ").split(" ")))
             if(len(constraint) == 0):
@@ -161,5 +173,4 @@ def simplex_input():
         print("ERROR: NOT A NUMBER")
         return
     
-
 simplex_input()
