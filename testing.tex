@@ -1,0 +1,163 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{geometry}
+
+\geometry{a4paper, margin=1in}
+
+\title{Simplex Method Test Results}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Team:}
+
+\begin{enumerate}
+    \item Valery Andruwenko (Team Leader)
+    \item Marat Shariev
+    \item Ivan Vasilev
+    \item Grigorii Belyaev
+\end{enumerate}
+
+\section*{Introduction}
+
+This document contains the results of testing the Simplex method implementation. The following three test cases are included:
+\begin{enumerate}
+    \item Test Case 1: A problem from "Lab 02.pdf," involving three variables and four constraints.
+    \item Test Case 2: A custom example with two variables and two constraints.
+    \item Test Case 3: A custom example with three variables and two constraints.
+\end{enumerate}
+
+For each test, we will provide the initial tableau, the basic variables, the set of all variables, and the expected output.
+
+\section*{Test Results}
+
+\subsection*{Test Case 1 (From "Lab 02.pdf")}
+
+\textbf{Objective Function:} Maximize \( F(x_1, x_2, x_3) = 100x_1 + 140x_2 + 120x_3 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+3x_1 + 6x_2 + 7x_3 &\leq 135, \\
+2x_1 + x_2 + 8x_3 &\leq 260, \\
+x_1 + x_2 + x_3 &\leq 220, \\
+5x_1 + 3x_2 + 3x_3 &\leq 360, \\
+x_1, x_2, x_3 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-100 & -140 & -120 & 0 & 0 & 0 & 0 & 0 \\
+3 & 6 & 7 & 1 & 0 & 0 & 0 & 135 \\
+2 & 1 & 8 & 0 & 1 & 0 & 0 & 260 \\
+1 & 1 & 1 & 0 & 0 & 1 & 0 & 220 \\
+5 & 3 & 3 & 0 & 0 & 0 & 1 & 360
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2, s_3, s_4 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, x_3, s_1, s_2, s_3, s_4 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 0, \quad x_2 = 15, \quad x_3 = 0 \quad \text{(maximize profit)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and provides the maximum profit.
+
+\subsection*{Test Case 2 (Custom Example 1)}
+
+\textbf{Objective Function:} Maximize \( F(x_1, x_2) = 2x_1 + 3x_2 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+x_1 + 2x_2 &\leq 10, \\
+4x_1 + x_2 &\leq 12, \\
+x_1, x_2 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-2 & -3 & 0 & 0 & 0 \\
+1 & 2 & 1 & 0 & 10 \\
+4 & 1 & 0 & 1 & 12
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, s_1, s_2 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 2, \quad x_2 = 4 \quad \text{(maximize objective function)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and maximizes the objective function.
+
+\subsection*{Test Case 3 (Custom Example 2)}
+
+\textbf{Objective Function:} Minimize \( F(x_1, x_2, x_3) = x_1 + 2x_2 + 3x_3 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+2x_1 + x_2 &\leq 20, \\
+x_1 + 3x_2 + x_3 &\leq 30, \\
+x_1, x_2, x_3 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-1 & -2 & -3 & 0 & 0 & 0 \\
+2 & 1 & 0 & 1 & 0 & 20 \\
+1 & 3 & 1 & 0 & 1 & 30
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, x_3, s_1, s_2 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 0, \quad x_2 = 10, \quad x_3 = 0 \quad \text{(minimize objective function)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and minimizes the objective function.
+
+\section*{Summary:}
+The test cases initialized the tableaux and variables successfully, preparing the foundation for performing simplex iterations.
+
+\end{document}
+
+
