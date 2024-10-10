@@ -1,5 +1,5 @@
-thing.py - main code
+Simplex.py - main code
 
-Simplex.ipnyb - simplex in jupiter notebook
+main.tex - report written latex
 
-main.tex - report latex
+test.tex - tests written in latex
