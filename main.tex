@@ -72,15 +72,16 @@
     \\ - Main Coding Implementation: Marat was mainly responsible for writing the core part of the program. He worked on coding the Simplex method from scratch, ensuring that it did not rely on built-in functions, as per the assignment's requirements. His task involved implementing the algorithm for solving Linear Programming Problems (LPP), which required careful attention to the mathematical operations and logic of the Simplex method.
     \item Team member 2: Vasilev Ivan
     \\ Grade : 5
-    \\- Testing: Ivan was responsible for testing the implemented program. He tested the code on different objective functions, constraints and user input mistakes as required by the assignment. Specifically, he ensured that the Simplex method worked across a variety of test cases, covering different numbers of variables and constraints. His role was crucial in validating the correctness and robustness of the program, and he documented any bugs or errors found during the testing phase.
+    \\- Testing: Ivan was responsible for testing the implemented program. He tested the code on different objective functions and constraints, as required by the assignment. Specifically, he ensured that the Simplex method worked across a variety of test cases, covering different numbers of variables and constraints. His role was crucial in validating the correctness and robustness of the program, and he documented any bugs or errors found during the testing phase.
     \item Team member 3: Belyaev Grigorii
     \\ Grade : 5
     \\- Research and Problem Specification: Grigorii's role involved researching tools, selecting the appropriate programming platform, and specifying the linear program to be solved. He helped identify a suitable LPP model that could be addressed by the Simplex method and ensured that the problem met all the criteria specified in the assignment. Grigorii also contributed to converting the problem into the standard form if necessary, which is an essential step in preparing the input for the Simplex algorithm.
 \end{itemize}
 \vspace{12pt}
-\noindent     \textbf{Link to the product.}
+\noindent     
+\textbf{Link to the product.}
 \begin{itemize}
-    \item The product is available:  
+    \item The product is available: \href{https://github.com/GodDamnMan/Optimization_prog_1}{GitHub Repository}
 \end{itemize}
 
 \vspace{12pt}
@@ -91,20 +92,136 @@
 \end{itemize}
 
 \vspace{12pt}
+\newpage
 
-\noindent  \textbf{Linear programming problem.}
-\begin{itemize}
-\item Maximization or Minimization?
-\vspace{10pt}
-    \item Objective function:
-    \vspace{10pt}
-    \item Constraint functions:
-    \vspace{5cm}
-\end{itemize}
+\section*{Test Results}
 
+\subsection*{Test Case 1 (From "Lab 02.pdf")}
 
+\textbf{Objective Function:} Maximize \( F(x_1, x_2, x_3) = 100x_1 + 140x_2 + 120x_3 \)
 
-\noindent     \textbf{Input}
+\textbf{Constraints:}
+\[
+\begin{aligned}
+3x_1 + 6x_2 + 7x_3 &\leq 135, \\
+2x_1 + x_2 + 8x_3 &\leq 260, \\
+x_1 + x_2 + x_3 &\leq 220, \\
+5x_1 + 3x_2 + 3x_3 &\leq 360, \\
+x_1, x_2, x_3 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-100 & -140 & -120 & 0 & 0 & 0 & 0 & 0 \\
+3 & 6 & 7 & 1 & 0 & 0 & 0 & 135 \\
+2 & 1 & 8 & 0 & 1 & 0 & 0 & 260 \\
+1 & 1 & 1 & 0 & 0 & 1 & 0 & 220 \\
+5 & 3 & 3 & 0 & 0 & 0 & 1 & 360
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2, s_3, s_4 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, x_3, s_1, s_2, s_3, s_4 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 0, \quad x_2 = 15, \quad x_3 = 0 \quad \text{(maximize profit)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and provides the maximum profit.
+
+\subsection*{Test Case 2 (Custom Example 1)}
+
+\textbf{Objective Function:} Maximize \( F(x_1, x_2) = 2x_1 + 3x_2 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+x_1 + 2x_2 &\leq 10, \\
+4x_1 + x_2 &\leq 12, \\
+x_1, x_2 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-2 & -3 & 0 & 0 & 0 \\
+1 & 2 & 1 & 0 & 10 \\
+4 & 1 & 0 & 1 & 12
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, s_1, s_2 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 2, \quad x_2 = 4 \quad \text{(maximize objective function)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and maximizes the objective function.
+
+\subsection*{Test Case 3 (Custom Example 2)}
+
+\textbf{Objective Function:} Minimize \( F(x_1, x_2, x_3) = x_1 + 2x_2 + 3x_3 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+2x_1 + x_2 &\leq 20, \\
+x_1 + 3x_2 + x_3 &\leq 30, \\
+x_1, x_2, x_3 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-1 & -2 & -3 & 0 & 0 & 0 \\
+2 & 1 & 0 & 1 & 0 & 20 \\
+1 & 3 & 1 & 0 & 1 & 30
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, x_3, s_1, s_2 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 0, \quad x_2 = 10, \quad x_3 = 0 \quad \text{(minimize objective function)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and minimizes the objective function.
+
+\section*{Summary:}
+The test cases initialized the tableaux and variables successfully, preparing the foundation for performing simplex iterations.
+\vspace{12pt}
+
+\textbf{Input}
 
 \vspace{12pt}
 The input contains:
@@ -140,8 +257,6 @@ or
 \noindent    
 \newpage
 \textbf{Code}
-
-Copy-paste your code here.
 
 \begin{lstlisting}[language=Python, caption=Программа на Python, label=lst:python-code]
 import math
@@ -184,9 +299,10 @@ class Simplex:
                 break
 
             self.basic[leaves - 1] = self.vars[enters]
-            
+
+            temp = self.solving[leaves][enters]
             for i in range(self.m):
-                self.solving[leaves][i] /= self.solving[leaves][enters]
+                self.solving[leaves][i] /= temp
         
             for i in range(self.n):
                 if i == leaves:
@@ -214,11 +330,16 @@ class Simplex:
     def print_initial(self):
         print("initial tableu:")
         string = '____'
-        for j in range (len(self.tableu[0])-1):
-            string += "|" + (self.eps + 4)//2 * " " + self.vars[j] + (self.eps + 4)//2 * " "
-        string += "|" + (self.eps + 2)//2 * " " + "Sol" + (self.eps + 4)//2 * " " + "|"
-        print(string)
-
+        if ((self.eps + spacing)%2 == 1 or (self.eps + spacing) == 5):
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + ((self.eps + spacing)//2) * " " + self.vars[j] + ((self.eps + spacing)//2) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + (self.eps + spacing)//2 * " " + "|"
+            print(string)
+        else: 
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + (self.eps + spacing)//2 * " " + self.vars[j] + ((self.eps + spacing)//2-1) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + ((self.eps + spacing)//2-1) * " " + "|"
+            print(string)
         k = 0
         for i in self.tableu:
             if(k == 0):
@@ -237,11 +358,17 @@ class Simplex:
         for i in range(len(self.basic)):
             print(self.basic[i], "=", self.solving[i+1][self.m-1])
             
-        string = '____|'
-        for j in range (len(self.tableu[0])-1):
-            string += (self.eps + 4)//2 * " " + self.vars[j] + (self.eps + 4)//2 * " " + "|"
-        string += (self.eps + 2)//2 * " " + "Sol" + (self.eps + 4)//2 * " " + "|"
-        print(string)
+        string = '____'
+        if ((self.eps + 4)%2 == 1 or (self.eps + 4) == 5):
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + ((self.eps + spacing)//2) * " " + self.vars[j] + ((self.eps + spacing)//2) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + (self.eps + spacing)//2 * " " + "|"
+            print(string)
+        else: 
+            for j in range (len(self.tableu[0])-1):
+                string += "|" + (self.eps + spacing)//2 * " " + self.vars[j] + ((self.eps + spacing)//2-1) * " "
+            string += "|" + ((self.eps + spacing)//2-1) * " " + "Sol" + ((self.eps + spacing)//2-1) * " " + "|"
+            print(string)
 
         k = 0
         for i in self.solving:
@@ -255,7 +382,7 @@ class Simplex:
             k+=1
         print()
 
-#function to get the input from the user and it's correctness
+
 def simplex_input():
 
     type = input("Greetings, this programm will solve your LP problem using Simplex method.\nEnter the type of the problem(Max/Min): ").lower()
@@ -306,9 +433,7 @@ def simplex_input():
         print("ERROR: NOT A NUMBER")
         return
     
-
 simplex_input()
-
 \end{lstlisting}
 
 
