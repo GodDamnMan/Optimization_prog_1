@@ -11,7 +11,7 @@
 \usepackage{hyperref}
 \usepackage{tcolorbox}
 \newcommand{\course}{Introduction to Optimization}
-\newcommand{\term}{Fall 2023}
+\newcommand{\term}{Fall 2024}
 \newcommand{\examnum}{Report of Programming Task 1}
 
 \usepackage{listings}
@@ -92,7 +92,6 @@
 \end{itemize}
 
 \vspace{12pt}
-\newpage
 
 \section*{Test Results}
 
@@ -219,30 +218,159 @@ x_1 = 0, \quad x_2 = 10, \quad x_3 = 0 \quad \text{(minimize objective function)
 
 \section*{Summary:}
 The test cases initialized the tableaux and variables successfully, preparing the foundation for performing simplex iterations.
+
+\subsection*{Test Case 3 (Custom Example 2)}
+
+\textbf{Objective Function:} Minimize \( F(x_1, x_2, x_3) = x_1 + 2x_2 + 3x_3 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+2x_1 + x_2 &\leq 20, \\
+x_1 + 3x_2 + x_3 &\leq 30, \\
+x_1, x_2, x_3 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-1 & -2 & -3 & 0 & 0 & 0 \\
+2 & 1 & 0 & 1 & 0 & 20 \\
+1 & 3 & 1 & 0 & 1 & 30
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, x_3, s_1, s_2 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 0, \quad x_2 = 10, \quad x_3 = 0 \quad \text{(minimize objective function)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and minimizes the objective function.
+
+\subsection*{Test Case 4 (From "Lab 03.pdf", Problem 1)}
+
+\textbf{Objective Function:} Maximize \( F(x_1, x_2, x_3) = 9x_1 + 10x_2 + 16x_3 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+18x_1 + 15x_2 + 12x_3 &\leq 360, \\
+6x_1 + 4x_2 + 8x_3 &\leq 192, \\
+5x_1 + 3x_2 + 3x_3 &\leq 180, \\
+x_1, x_2, x_3 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-9 & -10 & -16 & 0 & 0 & 0 & 0 \\
+18 & 15 & 12 & 1 & 0 & 0 & 360 \\
+6 & 4 & 8 & 0 & 1 & 0 & 192 \\
+5 & 3 & 3 & 0 & 0 & 1 & 180
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2, s_3 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, x_3, s_1, s_2, s_3 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = 0, \quad x_2 = 8, \quad x_3 = 20 \quad \text{(maximize objective function)}
+\]
+
+\textbf{Output Evaluation:} The output is correct as it satisfies all constraints and maximizes the objective function.
+
+\subsection*{Test Case 5 (From "Lab 03.pdf", Problem 2)}
+
+\textbf{Objective Function:} Maximize \( F(x_1, x_2, x_3, x_4, x_5, x_6) = 2x_1 + 3x_2 - x_4 \)
+
+\textbf{Constraints:}
+\[
+\begin{aligned}
+2x_1 - x_2 - 2x_4 + x_5 &= 16, \\
+3x_1 + 2x_2 + x_3 - 3x_4 &= 18, \\
+-x_1 + 3x_2 + 4x_4 + x_6 &= 24, \\
+x_1, x_2, x_3, x_4, x_5, x_6 &\geq 0.
+\end{aligned}
+\]
+
+\textbf{Tableau:}
+\[
+\begin{bmatrix}
+-2 & -3 & 0 & 1 & 0 & 0 & 0 \\
+2 & -1 & 0 & -2 & 1 & 0 & 16 \\
+3 & 2 & 1 & -3 & 0 & 0 & 18 \\
+-1 & 3 & 0 & 4 & 0 & 1 & 24
+\end{bmatrix}
+\]
+
+\textbf{Basic Variables:}
+\[
+\{ s_1, s_2, s_3 \}
+\]
+
+\textbf{All Variables:}
+\[
+\{ x_1, x_2, x_3, x_4, x_5, x_6 \}
+\]
+
+\textbf{Expected Output:}
+\[
+x_1 = \frac{6}{11}, \quad x_2 = \frac{90}{11}, \quad x_3 = 0, \quad x_4 = 0, \quad x_5 = \frac{254}{11}, \quad x_6 = 0
+\]
+
+\textbf{Output Evaluation:} The output is correct and matches the expected solution for maximizing the objective function.
+
+\section*{Summary:}
+The test cases initialized the tableaux and variables successfully, preparing the foundation for performing simplex iterations.
 \vspace{12pt}
 
-\textbf{Input}
-
-\vspace{12pt}
+\section*{Input Specifications}
 The input contains:
 \begin{itemize}
-    \item A vector of coefficients of objective function - $C$.
-    \item A matrix of coefficients of constraint function - $A$.
-    \item A vector of right-hand side numbers - $b$.
-    \item The approximation accuracy $\epsilon$.
+    \item A string specifying the type of the problem ("max" or "min").
+    \item A vector of coefficients of the objective function.
+    \item An integer representing the number of constraints.
+    \item A matrix of coefficients for the constraint functions.
+    \item A vector of right-hand side numbers.
+    \item The approximation accuracy (an integer).
 \end{itemize}
 
-\vspace{12pt}
-\noindent     \textbf{Output/Results}
-
+\section*{Output Specifications}
 The output contains:
 \begin{itemize}
-    \item The string "The method is not applicable!"
-    
-or
-
-    \item A vector of decision variables - $X^*$.
-    \item Maximum (minimum) value of the objective function.
+    \item An error message if there is an issue with the input or if the method is not applicable:
+        \begin{itemize}
+            \item "ERROR: UNKNOWN TYPE"
+            \item "ERROR: NO COEFFICIENTS"
+            \item "ERROR: NOT ENOUGH COEFFICIENTS"
+            \item "The method is not applicable!"
+        \end{itemize}
+    \item The initial simplex tableau.
+    \item The optimal solution if applicable:
+        \begin{itemize}
+            \item The string "optimum is [value]" showing the optimal value of the objective function.
+            \item A set of equations representing the values of the decision variables at the optimal solution (e.g., "s1 = [value]").
+        \end{itemize}
 \end{itemize}
 
 \noindent
